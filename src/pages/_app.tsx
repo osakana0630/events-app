@@ -1,5 +1,5 @@
-import React from 'react';
-import Layout from "../components/Layout/Layout";
+import React from 'react'
+import Layout from '../components/Layout/Layout'
 import 'antd/dist/antd.css'
 
 function MyApp({ Component, pageProps }) {
@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
     <Layout>
       <Component {...pageProps} />
     </Layout>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
