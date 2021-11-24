@@ -1,5 +1,3 @@
-import { Button } from 'antd'
-
 const IndexPage = () => (
   <div>
     <div style={{ display: 'flex', justifyContent: 'center', padding: '30px' }}>
