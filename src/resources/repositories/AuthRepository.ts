@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   browserLocalPersistence,
   setPersistence,
+  sendEmailVerification,
 } from 'firebase/auth'
 import { app } from '../../plugins/firebase'
 
@@ -17,21 +18,23 @@ const auth = getAuth(app)
 export default {
   getAuth: () => auth,
 
-  signUp: (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        // ..
-      })
+  signup: async (email, password) => {
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      )
+      await sendEmailVerification(user)
+      alert('登録成功')
+      return user
+    } catch (error) {
+      alert('登録失敗')
+      console.log(error)
+    }
   },
 
-  signIn: (email, password) => {
+  signIn: async (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in

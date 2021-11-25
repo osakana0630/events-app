@@ -1,9 +1,11 @@
+import Layout from '../components/Layout/Layout'
+
 const IndexPage = () => (
-  <div>
+  <Layout>
     <div style={{ display: 'flex', justifyContent: 'center', padding: '30px' }}>
       <h1>Homeページだよ！！！！</h1>
     </div>
-  </div>
+  </Layout>
 )
 
 export default IndexPage

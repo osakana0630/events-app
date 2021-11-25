@@ -1,18 +1,17 @@
+import { Form, Input, Button, Col } from 'antd'
+import RepositoryFactory from '../resources/RepositoryFactory'
 import Link from 'next/link'
 import Head from 'next/head'
-import { Form, Input, Button, Checkbox, Col } from 'antd'
-import RepositoryFactory from '../resources/RepositoryFactory'
+import Router from 'next/router'
 const { Item } = Form
 const authRepository = RepositoryFactory.get('auth')
 
-const Login = () => {
+const Signup = () => {
   // submit時のイベントハンドラ
   const onFinish = async (values) => {
-    console.log(values)
     const { email, password } = values
-
     const user = await authRepository.signup(email, password)
-    console.log(user)
+    await Router.push('/')
   }
 
   const layout = {
@@ -23,11 +22,11 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>login</title>
+        <title>signup</title>
       </Head>
       <div style={{ paddingTop: '30px' }}>
         <div style={{ textAlign: 'center' }}>
-          <h1>ログイン</h1>
+          <h1>サインアップ</h1>
         </div>
         <Form
           name="basic"
@@ -59,19 +58,42 @@ const Login = () => {
             <Input.Password />
           </Item>
 
-          <Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
+          <Item
+            name="confirm"
+            label="Confirm Password"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve()
+                  }
+                  return Promise.reject(
+                    new Error(
+                      'The two passwords that you entered do not match!',
+                    ),
+                  )
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
           </Item>
 
           <Item wrapperCol={{ offset: 6, span: 3 }}>
             <Button type="primary" htmlType="submit">
-              Login
+              登録
             </Button>
           </Item>
         </Form>
         <Col offset={6}>
-          <Link href="/signup">
-            <a>アカウントの新規登録はこちらから</a>
+          <Link href="/login">
+            <a>登録済みの方はこちらから</a>
           </Link>
         </Col>
       </div>
@@ -79,4 +101,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup
