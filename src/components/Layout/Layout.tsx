@@ -37,11 +37,9 @@ const Layout: React.FC<Props> = ({ children }) => {
             </Link>
           </Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
-          {user && (
-            <Menu.Item key="3" onClick={onClickSignOut}>
-              ログアウト
-            </Menu.Item>
-          )}
+          <Menu.Item key="3" onClick={onClickSignOut} disabled={!user}>
+            ログアウト
+          </Menu.Item>
         </Menu>
       </AntdLayout.Header>
       <Content style={{ padding: '0 50px', marginTop: 64 }}>{children}</Content>

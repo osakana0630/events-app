@@ -44,6 +44,7 @@ export default {
   signOut: async () => {
     try {
       await signOut(auth)
+      await Router.push('/login')
     } catch (error) {
       console.log(error)
     }
