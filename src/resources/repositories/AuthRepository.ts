@@ -2,9 +2,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  browserLocalPersistence,
-  setPersistence,
   sendEmailVerification,
+  signOut,
 } from 'firebase/auth'
 import { app } from '@/plugins/firebase'
 import Router from 'next/router'
@@ -37,6 +36,14 @@ export default {
     try {
       await signInWithEmailAndPassword(auth, email, password)
       await Router.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  signOut: async () => {
+    try {
+      await signOut(auth)
     } catch (error) {
       console.log(error)
     }
