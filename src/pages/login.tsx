@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import Router from 'next/router'
 import { Form, Input, Button, Checkbox, Col } from 'antd'
 import RepositoryFactory from '../resources/RepositoryFactory'
 const { Item } = Form
@@ -8,11 +9,9 @@ const authRepository = RepositoryFactory.get('auth')
 const Login = () => {
   // submit時のイベントハンドラ
   const onFinish = async (values) => {
-    console.log(values)
     const { email, password } = values
-
-    const user = await authRepository.signup(email, password)
-    console.log(user)
+    const user = await authRepository.signin(email, password)
+    await Router.push('/')
   }
 
   const layout = {
