@@ -6,7 +6,8 @@ import {
   setPersistence,
   sendEmailVerification,
 } from 'firebase/auth'
-import { app } from '../../plugins/firebase'
+import { app } from '@/plugins/firebase'
+import Router from 'next/router'
 
 type EmailAndPassword = {
   email: string
@@ -26,7 +27,7 @@ export default {
         password,
       )
       await sendEmailVerification(user)
-      return user
+      await Router.push('/')
     } catch (error) {
       console.log(error)
     }
@@ -34,9 +35,8 @@ export default {
 
   signin: async (email, password) => {
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password)
-      alert('ログインに成功しました。')
-      return user
+      await signInWithEmailAndPassword(auth, email, password)
+      await Router.push('/')
     } catch (error) {
       console.log(error)
     }
