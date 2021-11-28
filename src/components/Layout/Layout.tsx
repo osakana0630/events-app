@@ -20,7 +20,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     await authRepository.signOut()
   }
   return (
-    <AntdLayout style={{ height: '100vh' }}>
+    <AntdLayout style={{ height: 'auto' }}>
       <Head>
         <title>CompassV2</title>
         <meta charSet="utf-8" />

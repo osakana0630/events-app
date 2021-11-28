@@ -1,11 +1,15 @@
 import Layout from '../components/Layout/Layout'
+import { EventList } from '@/components/List/EventList'
 
-const IndexPage = () => (
-  <Layout>
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '30px' }}>
-      <h1>Homeページだよ！！！！</h1>
-    </div>
-  </Layout>
-)
+const IndexPage = () => {
+  return (
+    <Layout>
+      <div style={{ padding: '30px' }}>
+        <h1>Homeページだよ！！！！</h1>
+        <EventList />
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage

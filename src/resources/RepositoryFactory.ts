@@ -1,7 +1,9 @@
-import AuthRepository from './repositories/AuthRepository'
+import AuthRepository from '@/resources/repositories/AuthRepository'
+import EventRepository from '@/resources/repositories/EventRepository'
 
 interface RepositoryCollection {
   auth: typeof AuthRepository
+  event: typeof EventRepository
 }
 
 interface RepositoryFactory {
@@ -12,6 +14,7 @@ interface RepositoryFactory {
 
 const repositories = {
   auth: AuthRepository,
+  event: EventRepository,
 }
 
 export default {
